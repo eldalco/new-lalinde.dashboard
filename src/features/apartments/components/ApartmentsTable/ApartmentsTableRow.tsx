@@ -3,6 +3,7 @@
 import type { Cell, Row } from "@tanstack/react-table";
 
 import { ApartmentsTableCell } from "@/features/apartments/components/ApartmentsTable/ApartmentsTableCell";
+import { getStickyCellClass } from "@/features/apartments/components/ApartmentsTable/table-sticky";
 import { apartmentTableFeatures } from "@/features/apartments/components/ApartmentsTable/table-features";
 import type { ApartmentListItem } from "@/features/apartments/mappers/apartment-mapper";
 
@@ -18,15 +19,11 @@ export function ApartmentsTableRow({
   FlexRender,
 }: ApartmentsTableRowProps) {
   return (
-    <tr className="border-b border-border transition-colors hover:bg-surface-muted/70 last:border-b-0">
-      {row.getAllCells().map((cell, index) => (
+    <tr className="group border-b border-border transition-colors hover:bg-surface-muted/70 last:border-b-0">
+      {row.getAllCells().map((cell) => (
         <ApartmentsTableCell
           key={cell.id}
-          className={
-            index === 0
-              ? "sticky left-0 z-[1] bg-surface shadow-[1px_0_0_var(--border)]"
-              : undefined
-          }
+          className={getStickyCellClass(cell.column.id)}
         >
           <FlexRender cell={cell} />
         </ApartmentsTableCell>

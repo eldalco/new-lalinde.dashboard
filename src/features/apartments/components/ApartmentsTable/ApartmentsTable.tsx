@@ -12,6 +12,7 @@ import {
   type ApartmentColumnsOptions,
 } from "@/features/apartments/components/ApartmentsTable/columns";
 import { apartmentTableFeatures } from "@/features/apartments/components/ApartmentsTable/table-features";
+import { useDragScroll } from "@/features/apartments/hooks/useDragScroll";
 import type { ApartmentListItem } from "@/features/apartments/mappers/apartment-mapper";
 import type {
   ApartmentSortId,
@@ -39,6 +40,7 @@ export function ApartmentsTable({
   updatingAptoNumber,
 }: ApartmentsTableProps) {
   const tableData = data.length > 0 ? data : EMPTY_DATA;
+  const { ref: scrollRef, dragProps } = useDragScroll<HTMLDivElement>();
 
   const columns = useMemo(
     () =>
@@ -83,7 +85,11 @@ export function ApartmentsTable({
 
   return (
     <div className="overflow-hidden rounded-[var(--radius)] border border-border bg-surface shadow-[var(--shadow-sm)]">
-      <div className="overflow-x-auto">
+      <div
+        ref={scrollRef}
+        {...dragProps}
+        className={`overflow-x-auto ${dragProps.className}`}
+      >
         <table className="min-w-max w-full border-collapse text-left">
           <ApartmentsTableHeader
             headerGroups={table.getHeaderGroups()}

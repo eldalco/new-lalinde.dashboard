@@ -5,6 +5,7 @@ import {
 
 import { Button } from "@/components/ui/Button";
 import { AreaCell } from "@/features/apartments/components/ApartmentsTable/AreaCell";
+import { ColumnHeaderLabel } from "@/features/apartments/components/ApartmentsTable/ColumnHeaderLabel";
 import { CurrencyCell } from "@/features/apartments/components/ApartmentsTable/CurrencyCell";
 import { StatusCell } from "@/features/apartments/components/ApartmentsTable/StatusCell";
 import { ApartmentStatusSelect } from "@/features/apartments/components/ApartmentStatusSelect/ApartmentStatusSelect";
@@ -38,52 +39,60 @@ export function createApartmentColumns({
     }),
     columnHelper.accessor("total_price", {
       id: "total_price",
-      header: "Precio total",
+      header: () => <ColumnHeaderLabel lines={["Precio", "total"]} />,
       cell: ({ getValue }) => <CurrencyCell value={getValue()} />,
     }),
     columnHelper.accessor("built_area", {
       id: "built_area",
-      header: "Área construida (m²)",
+      header: () => (
+        <ColumnHeaderLabel lines={["Área", "construida (m²)"]} />
+      ),
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("terrace_area", {
       id: "terrace_area",
-      header: "Área pública/terraza (m²)",
+      header: () => (
+        <ColumnHeaderLabel lines={["Área pública/", "terraza (m²)"]} />
+      ),
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("acue_area", {
       id: "acue_area",
-      header: "Área ACUE (m²)",
+      header: () => <ColumnHeaderLabel lines={["Área ACUE", "(m²)"]} />,
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("stair_area", {
       id: "stair_area",
-      header: "Área escalera (m²)",
+      header: () => (
+        <ColumnHeaderLabel lines={["Área", "escalera (m²)"]} />
+      ),
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("total_area", {
       id: "total_area",
-      header: "Área total (m²)",
+      header: () => <ColumnHeaderLabel lines={["Área total", "(m²)"]} />,
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("square_meter_price", {
       id: "square_meter_price",
-      header: "Precio m²",
+      header: () => <ColumnHeaderLabel lines={["Precio", "m²"]} />,
       cell: ({ getValue }) => <CurrencyCell value={getValue()} />,
     }),
     columnHelper.accessor("deck_area", {
       id: "deck_area",
-      header: "Área deck (m²)",
+      header: () => <ColumnHeaderLabel lines={["Área deck", "(m²)"]} />,
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("private_area", {
       id: "private_area",
-      header: "Área privada (m²)",
+      header: () => <ColumnHeaderLabel lines={["Área privada", "(m²)"]} />,
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("global_total_area", {
       id: "global_total_area",
-      header: "Área global total (m²)",
+      header: () => (
+        <ColumnHeaderLabel lines={["Área global", "total (m²)"]} />
+      ),
       cell: ({ getValue }) => <AreaCell value={getValue()} />,
     }),
     columnHelper.accessor("bathrooms", {
@@ -115,11 +124,18 @@ export function createApartmentColumns({
       id: "floor",
       header: "Piso",
     }),
+    columnHelper.accessor("subtypeName", {
+      id: "subtype",
+      header: "Subtipo",
+      cell: ({ getValue }) => (
+        <span className="capitalize">{getValue()}</span>
+      ),
+    }),
     columnHelper.accessor("statusLabel", {
       id: "status",
       header: "Estado",
       cell: ({ row }) => (
-        <div className="min-w-36 space-y-2">
+        <div className="min-w-[7.5rem] space-y-1.5">
           <StatusCell statusLabel={row.original.statusLabel} />
           <div className="hidden lg:block">
             <ApartmentStatusSelect
@@ -134,13 +150,6 @@ export function createApartmentColumns({
             />
           </div>
         </div>
-      ),
-    }),
-    columnHelper.accessor("subtypeName", {
-      id: "subtype",
-      header: "Subtipo",
-      cell: ({ getValue }) => (
-        <span className="capitalize">{getValue()}</span>
       ),
     }),
     columnHelper.display({

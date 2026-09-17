@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { PageContainer } from "@/components/layout/PageContainer";
-import { AnalyticsSection } from "@/features/analytics/components/AnalyticsSection/AnalyticsSection";
 import { ApartmentsSection } from "@/features/apartments/components/ApartmentsSection";
 import { ReportsSection } from "@/features/reports/components/ReportsSection/ReportsSection";
 import { PricesVisibilityToggle } from "@/features/settings/components/PricesVisibilityToggle/PricesVisibilityToggle";
