@@ -28,7 +28,7 @@ export default function DashboardPage() {
       <div className="mt-8 space-y-10">
         <ApartmentsSection />
         <ReportsSection />
-        <AnalyticsSection />
+        {/* <AnalyticsSection /> */}
       </div>
     </PageContainer>
   );
